@@ -1,0 +1,60 @@
+*{
+    margin: 0;    /* get rid of default styling*/
+    padding: 0;
+    font-family: 'Open Sans',sans-serif; /* 'if this falls' , this font will be displayed */
+}
+body{
+    background: #eeeeee
+}
+.tm-container{
+    max-width: 1200px; /* usually bootstrap containers. */
+    margin: 0 auto; /* 0 -> no margin on the top and bottom, auto -> automatic margin on left and right. */
+                    /* this also CENTER HTML element in this case (div)*/
+    
+}
+.tm-header{
+    background: #fff;
+}
+.tm-header::after{
+    content: " ";
+    clear: both;
+    display: block;
+    visibility: none;
+}
+.tm-logo{
+    float: left;
+}
+.tm-nav{
+    float: right;
+    margin-right: 20px;
+}
+.tm-nav ul li{
+    display: inline-block;
+}
+.tm-nav ul li a{
+    padding: 10px 20px; /* 10 top/down || 20 left/right */
+    text-decoration: none;
+    color: #303030;
+    line-height: 100px;
+}
+.tm-nav ul li a:hover{
+    background: lightblue;
+    color: blue;
+    font-weight: bold;
+}
+
+.first{
+    width: 50%;
+    height: 50%;
+    border: 1px solid red;
+    float: left;
+}
+.second{
+    width: 50%;
+    height: 50%;
+    float: right;
+    margin-right: 0px;
+    border: 1px solid blue;
+}
+/* ---------------------------------------------------------------------- */
+

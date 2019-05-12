@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trips</title>
+</head>
+<body>
+    <h1>Trips</h1>
+
+    <form>
+            <input  type="url" class="form-control " placeholder="image"                ng-model="trip.image"> <br>
+            <input  type="number" class="form-control " placeholder="available tickets" ng-model="trip.tickets"> <br>
+            <input  type="text" class="form-control " placeholder="country/es"          ng-model="trip.country"> <br>
+            <input  type="text" class="form-control " placeholder="city/es"             ng-model="trip.city"> <br>
+            <input  type="number" class="form-control " placeholder="price"             ng-model="trip.price"> <br>
+            <input  type="date" class="form-control " placeholder="start date"          ng-model="trip.sdate"> <br>
+            <input  type="date" class="form-control " placeholder="end date"            ng-model="trip.edate"> <br>
+            <textarea type="text" placeholder="More about the trip" class="form-control " rows="7"  ng-model="trip.more" >
+                
+            </textarea>
+            
+            <button style="margin: 20px 10px;" class="btn btn-success" ng-click="submitTrip()">Submit</button>
+            <td><button class="btn btn-info" ng-click="update(trip._id)">Update</button></td>
+    </form>
+    
+    <table class="table">
+        <thead>
+               <tr>
+                   <th>image</th>
+                   <th>available tickets</th>
+                   <th>country</th>
+                   <th>city</th>
+                   <th>start date</th>
+                   <th>end date</th>
+                   <th>more</th>
+                   <th>&nbsp;</th> <!-- for blank spacing !-->
+                   <th>&nbsp;</th>
+                   
+               </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="vacation in defTrips">
+                    <td ng-if="$odd" style="background-color:#ffffff"><img src="{{vacation.image}}" alt="image" style="width: 100%;"></td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{ vacation.tickets }}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{ vacation.country }}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{ vacation.city }}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{ vacation.price }}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{ vacation.sdate }}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{ vacation.edate }}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{ vacation.more }}</td>
+                    <td ng-if="$even"><img src="{{vacation.image}}" alt="image" style="width: 100%;"></td>
+                    <td ng-if="$even">{{ vacation.tickets  }}</td>
+                    <td ng-if="$even">{{ vacation.country }}</td>
+                    <td ng-if="$even">{{ vacation.city }}</td>
+                    <td ng-if="$even">{{ vacation.price }}</td>
+                    <td ng-if="$even">{{ vacation.sdate  }}</td>
+                    <td ng-if="$even">{{ vacation.edate }}</td>
+                    <td ng-if="$even">{{ vacation.more }}</td>
+              
+                <td><button class="btn btn-danger" ng-click="remove(vacation._id)">Remove</button></td>
+                <td><button class="btn btn-warning" ng-click="edit(vacation._id)">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>
