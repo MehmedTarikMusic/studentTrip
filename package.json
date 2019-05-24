@@ -1,0 +1,21 @@
+{
+  "name": "yourtrip",
+  "version": "1.0.0",
+  "description": "touristic web-application",
+  "main": "rest.js",
+  "dependencies": {
+    "angular-growl-notifications": "^2.6.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "growl": "^1.10.5",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mongojs": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mehmed Tarik Music",
+  "license": "ISC"
+}

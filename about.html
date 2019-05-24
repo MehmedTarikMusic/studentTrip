@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About</title>
+</head>
+<body>
+    
+
+    <div class="ab-container">
+
+    <p><button  type="button" class="btn btn-success" data-toggle="modal" data-target="#SingUpModal" ng-disabled="userSingUp"> Sing up </button>
+                    
+                
+                    
+        <div class="modal fade" id="SingUpModal">
+                
+            <div class="modal-dialog modal-width">
+                <div class="modal-content"> 
+                    <div class="modal-header">
+                       <b>Sing up</b>
+                    </div>
+                    <div class="modal-body">
+
+                            <form>
+                               <input ng-model="usersin.username" type="text" class="form-control " placeholder="user name"> <br>
+                               <input ng-model="usersin.password" type="password" class="form-control " placeholder="password"> 
+                               <button style="margin: 20px 10px;" class="btn btn-danger" ng-click="singup()">Sing up</button>
+                            </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+
+    
+
+    <p><button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#LogInModal" ng-disabled="userSingIn">Sing in</button>
+                    
+                
+                    
+        <div class="modal fade" id="LogInModal">
+                
+            <div class="modal-dialog modal-width">
+                <div class="modal-content"> 
+                    <div class="modal-header">
+                       <b>Log in</b>
+                    </div>
+                    <div class="modal-body">
+
+                            <form>
+                               <input ng-model="userlog.usernamel" type="text" class="form-control " placeholder="user name (login)"> <br>
+                               <input ng-model="userlog.passwordl" type="password" class="form-control " placeholder="password"> 
+                               <button style="margin: 20px 10px;" class="btn btn-primary" ng-click="singin(userlog.usernamel,userlog.passwordl)">Log in</button>
+                            </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p><button  type="button" class="btn btn-warning" ng-click="userLogoutt()" ng-show="userLogOut">log out</button>
+    </div>
+    <h1>Write comment</h1>
+
+    <form >
+        
+            <textarea ng-disabled="commentArea" type="text" placeholder="comment" class="form-control " rows="4"  ng-model="comentar.comentar" >
+                
+                </textarea>
+            <button style="margin: 20px 10px;" class="btn btn-secondary" ng-click="comment()">Comment</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                
+                <td><h1 >Comments</h1></td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <div ng-show="showComments">
+               <b> <h5 style="color: red;text-align: center">Comment are not available if you are not Sing in !</h5></b>
+            </div>
+            <tr ng-show="commentsList" ng-repeat="com in komentari">
+                <td style="margin: 3px"><b>{{com.person}}: </b> </td> 
+                <td style="margin: 3px">{{com.Commentar}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

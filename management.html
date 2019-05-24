@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+    <title>Management</title>
+</head>
+<body>
+    
+    <!-- <div style="font-size: 50px;margin:10px;">
+
+          <span style="margin-right: 10%">Total profit: {{totalProfit}}</span> 
+          <span style="margin-right: 10%">Total students: {{totalStudents}}</span>
+          <span>Total books: {{totalBook}} </span>
+    </div> 
+
+    <div>
+        <span>Total profit: {{totalProfit}}</span> 
+        <span>Total students: {{totalStudents}}</span>
+        <span>Total books: {{totalBook}} </span>
+    </div> -->
+            
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1"><b>overview</b></h2>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-t-25">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="overview-item overview-item--c1">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-account-o"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>{{totalStudents}}</h2>
+                                        <span>Total students</span>
+                                    </div>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart1"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="overview-item overview-item--c2">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-card"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>{{totalBook}}</h2>
+                                        <span>Total books</span>
+                                    </div>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="overview-item overview-item--c3">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-book"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>{{totalProfit/totalBook | currency : "$" }}</h2>
+                                        <span>Average book earnings</span>
+                                    </div>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="overview-item overview-item--c4">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-money"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>{{totalProfit | currency : "$" }}</h2>
+                                        <span>total earnings</span>
+                                    </div>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart4"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                   
+                    <div class="col-lg-6">
+                        <div class="au-card chart-percent-card">
+                            <div class="au-card-inner">
+                                <h3 class="title-2 tm-b-5">char by %</h3>
+                                <div class="row no-gutters">
+                                    <div class="col-xl-6">
+                                        <div class="chart-note-wrap">
+                                            <div class="chart-note mr-0 d-block">
+                                                <span class="dot dot--blue"></span>
+                                                <span>products</span>
+                                            </div>
+                                            <div class="chart-note mr-0 d-block">
+                                                <span class="dot dot--red"></span>
+                                                <span>services</span>
+                                            </div>
+                                            <div class="chart-note mr-0 d-block">
+                                                <span class="dot dot--green"></span>
+                                                <span>moje</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="percent-chart">
+                                            <canvas id="percent-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9" >
+                        <h2 class="title-1 m-b-25">Earnings By Items</h2>
+                        <div class="table-responsive table--no-card m-b-40">
+                            <table class="table table-borderless table-striped table-earning">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>date</th>
+                                        <th>order ID</th>
+                                        <th>name</th>
+                                        <th class="text-right">price</th>
+                                        <th class="text-right">quantity</th>
+                                        <th class="text-right">total</th> -->
+                                        <th>Vacation ID</th>
+                                        <th>Profit</th>
+                                        <th>Number of bookings</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="groupInfo in personGroupInfo">
+                                        <td>{{groupInfo._id}}</td>
+                                        <td>{{groupInfo.total | currency : "$" }}</td>
+                                        <td>{{groupInfo.number}}</td>
+                                      
+                                   </tr>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <h2 class="title-1 m-b-25">Top countries</h2>
+                        <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
+                            <div class="au-card-inner">
+                                <div class="table-responsive">
+                                    <table class="table table-top-countries">
+                                        <tbody>
+                                            <tr>
+                                                <td>United States</td>
+                                                <td class="text-right">$119,366.96</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Australia</td>
+                                                <td class="text-right">$70,261.65</td>
+                                            </tr>
+                                            <tr>
+                                                <td>United Kingdom</td>
+                                                <td class="text-right">$46,399.22</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Turkey</td>
+                                                <td class="text-right">$35,364.90</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Germany</td>
+                                                <td class="text-right">$20,366.96</td>
+                                            </tr>
+                                            <tr>
+                                                <td>France</td>
+                                                <td class="text-right">$10,366.96</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Australia</td>
+                                                <td class="text-right">$5,366.96</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Italy</td>
+                                                <td class="text-right">$1639.32</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Created by Mehmed. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <div class="first">
+
+       <table class="table">
+           <thead>
+               <tr>
+                   <th>Vacation ID</th>
+                   <th>Name</th>
+                   <th>Phone</th>
+                   <th>Price</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr ng-repeat="info in personInfo">
+                    <td ng-if="$odd" style="background-color:#ffffff">{{info.vacation_id}}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{info.username}}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{info.phone}}</td>
+                    <td ng-if="$odd" style="background-color:#ffffff">{{info.price}}</td>
+                    <td ng-if="$even">{{info.vacation_id}}</td>
+                    <td ng-if="$even">{{info.username}}</td>
+                    <td ng-if="$even">{{info.phone}}</td>
+                    <td ng-if="$even">{{info.price}}</td>
+               </tr>
+           </tbody>
+       </table>
+      
+
+    </div>
+
+    <div class="second">
+
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Vacation ID</th>
+                            <th>Profit</th>
+                            <th>Number of bookings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="groupInfo in personGroupInfo">
+                             <td ng-if="$odd" style="background-color:#ffffff">{{groupInfo._id}}</td>
+                             <td ng-if="$odd" style="background-color:#ffffff">{{groupInfo.total}}</td>
+                             <td ng-if="$odd" style="background-color:#ffffff">{{groupInfo.number}}</td>
+                             <td ng-if="$even">{{groupInfo._id}}</td>
+                             <td ng-if="$even">{{groupInfo.total}}</td>
+                             <td ng-if="$even">{{groupInfo.number}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+
+    </div>  -->
+
+    <!-- <div chart1>
+
+        </div> -->
+    
+</body>
+</html>

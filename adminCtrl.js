@@ -52,8 +52,7 @@ myApp.controller('managementCtrl', function($scope,$http,$window){
 
     $http.get('/totalProfit').success(function(response){
 
-        console.log(response+ " *****");
-        
+      
         $scope.totalProfit = response;
         
     });
@@ -72,4 +71,42 @@ myApp.controller('managementCtrl', function($scope,$http,$window){
         
     });
 
+    $http.get('/getCount/' + "stu").success(function(response){
+
+        
+        $scope.totalStudents = response;
+
+    });
+
+    $http.get('/getCount/' + "book").success(function(response){
+
+        $scope.totalBook = response;
+
+    });
+
 });
+
+myApp.directive('chart1',function(){
+
+    return {
+        restrict: 'A',
+        link: function($scope,$elm,$attr){  // link for a google chart !
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string','Javascript Frameworks'); // ('type','nameOfColumn')
+            data.addColumn('number','students');
+            data.addRows([['angular',10],['bootstrap',6],['nodejs',4],['php',12]]);
+
+            var options = {
+                'title': 'students interests',
+                'width': 500,
+                'height':500
+            }
+            var chart = new google.visualization.PieChart($elm[0]);
+            chart.draw(data, options);
+        }          
+    }
+    
+});
+
+//google.load("visualization", "1", {packages:["corechart"]});

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+
+    
+  
+<div class="h-container">
+    <div class="h-filters">
+        
+        
+        <form>
+                <div class="row">
+                  <div class="col">
+                    <input type="text" class="form-control" ng-model="price.low" type="number" placeholder="From price">
+                  </div>
+                  <-->
+                  <div class="col">
+                    <input type="text" class="form-control" ng-model="price.high" type="number" placeholder="To price">
+                  </div>
+                  <div class="col"> 
+                <button type="submit"  class="btn btn-prime" ng-click="priceFind(price.low,price.high)">SEARCH PRICE</button>
+            </div>
+            
+        </div>
+                    <p></p>
+
+                <div class="row">
+                        <div class="col">
+                          <input type="text" class="form-control" ng-model="place.country" placeholder="Country/es">
+                        </div>
+                        <span style="visibility: hidden"><--></span>
+                        <div class="col">
+                          <input type="text" class="form-control" ng-model="place.city" placeholder="City/es">
+                        </div>
+                        <div class="col">
+                        <button type="submit"  class="btn btn-prime" ng-click="placeFind(place.country,place.city)">SEARCH PLACE</button>
+                    </div>
+                </div>
+       </form>
+
+    </div>
+
+    <div class="h-log">
+
+            <div class="ab-container">
+
+                    <p><button  type="button" class="btn btn-success" data-toggle="modal" data-target="#SingUpModal" ng-disabled="stuSing"> Sing up </button>
+                                    
+                                
+                                    
+                        <div class="modal fade" id="SingUpModal">
+                                
+                            <div class="modal-dialog modal-width">
+                                <div class="modal-content"> 
+                                    <div class="modal-header">
+                                       <b>Sing up</b>
+                                    </div>
+                                    <div class="modal-body">
+                
+                                            <form>
+                                               <input ng-model="student.username"    type="text" class="form-control " placeholder="student name"> <br>
+                                               <input ng-model="student.password"    type="password" class="form-control " placeholder="password"> <br>
+                                               <input ng-model="student.email"       type="email" class="form-control" placeholder="email"> <br>
+                                               <input ng-model="student.indexNumber" type="text" class="form-control" placeholder="index number"> <br>
+                                               <button style="margin: 20px 10px;" class="btn btn-outline-success" ng-click="stu_singup()">Sing up</button>
+                                            </form>
+                
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                    
+                
+                    
+                
+                    <p><button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#LogInModal" ng-disabled="stuLog">Log in</button>
+                                    
+                                
+                                    
+                        <div class="modal fade" id="LogInModal">
+                                
+                            <div class="modal-dialog modal-width">
+                                <div class="modal-content"> 
+                                    <div class="modal-header">
+                                       <b>Log in</b>
+                                    </div>
+                                    <div class="modal-body">
+                
+                                            <form>
+                                               <input ng-model="student1.username" type="text" class="form-control " placeholder="student name"> <br>
+                                               <input ng-model="student1.password" type="password" class="form-control " placeholder="password"> 
+                                               <button style="margin: 20px 10px;" class="btn btn-outline-danger" ng-click="stu_login(student1.username, student1.password)">Log in</button>
+                                            </form>
+                
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                   
+                    </div>
+                    
+    </div>
+
+    <button type="button" class ="btn btn-warning " ng-click="studentLogoutt()" ng-show="studentLogout">Log out</button>
+
+</div>
+
+    <!-----------------------------------------------------        BOOK      ------------------------------------------------------------->
+    <div class="b-form" ng-show="bookForm" style="position: fixed; z-index: 1; left: 20%; background-color: blueviolet">
+            <button  style=" display: inline-block;margin: 10px" type="button" class="btn btn-default" ng-click="close()"> X </button>
+            <form style="padding-top: 5%">
+               <input ng-model="booktrip.username" type="text" class="form-control " placeholder="user name"> <br>
+               <input ng-model="booktrip.phone" type="tel" class="form-control " placeholder="065/111-222"> 
+               <button  type="submit" style="margin: 20px 45%; display: inline-block;" class="btn btn-success " ng-click="bookTrip(); ticketsManagement()">Book Trip</button>
+               
+           </form> 
+       </div>
+                  
+
+    <div  class="row">
+            <div style="margin-top: 5px; " ng-repeat="vacation in defTrips" class="col-lg-3 t-trip">
+                 <img class="tr-img" src="{{vacation.image}}"  alt="picture " style="width: 100%;"><br>
+                 <p>Country:<b> {{vacation.country}}</b></p>
+                 <p style="margin-top: -15px;">City:<b> {{vacation.city}}</b></p>
+                 <p style="margin-top: -15px;">Available tickets:<b> {{vacation.tickets}}</b></p>
+                 <p style="margin-top: -15px;">Price: <b>  {{ vacation.price | currency : "$"  }} </b> </p>
+                 <p style="margin-top: -15px;">interesting:<b> {{vacation.interesting}}</b></p>
+                <p style="margin-top: -15px;"><button  type="button" class="btn btn-primary tr-button" data-toggle="modal" data-target="#myModal-{{$index}}"> More </button>
+                    
+                
+                    
+                    <div class="modal fade" id="myModal-{{$index}}">
+                            
+                        <div class="modal-dialog modal-width">
+                            <div class="modal-content"> 
+                                <div class="modal-header">
+                                    <span> <b>{{vacation.country}}</b></span>
+                                    <span> <b>{{vacation.city}}</b></span>
+                                    <span>{{vacation.price | currency : "$" }}</span>
+                                </div>
+                                <div class="modal-body">
+                                        {{vacation.more}} 
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+                   <p style="margin-top: -15px;"> <button  type="button" class="btn btn-success tr-button" ng-click="book(vacation._id,vacation.price)" ng-disabled="bookShow">Book</button> </p>
+                   <p style="margin-top: -25px;">  <button type="button" class ="btn btn-danger  tr-button" ng-click="interesting(vacation._id)"         ng-disabled="interestShow" style="margin-top: 10px;">interesting</button></p>
+                    
+
+                    
+
+            </div> <!-- ng-repeat -->
+
+            
+
+
+        </div>
+
+        <div class="container tr-forback">
+                <button ng-click="forward()" ng-disabled="nomore" class="btn btn-warning" type="button" style="float:right;">forward >  </button>
+                <button ng-click="backward()" ng-disabled="page == 1" class="btn btn-warning" type="button" style="float:left;">< backward  </button>
+        </div>
+
+        <random-ninja trips="defTrips" title="'Random Ninja'"> <!-- "''" we must have pute like this due it is not object it is string and we have to emphasize it !-->
+
+        </random-ninja>
+
+        
+    
+</body>
+</html>

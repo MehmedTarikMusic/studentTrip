@@ -12,12 +12,13 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 
+
 // -------------------------------------------------   FILTERS ---------------------------------------------------------------
 app.get('/trips/:pricelow/:pricehigh', function(req,res){
 
     var PriceLow = parseInt(req.params.pricelow);
     var PriceHigh = parseInt(req.params.pricehigh);
-    console.log(PriceLow + "  " + PriceHigh);
+  // console.log(PriceLow + "  " + PriceHigh);
 
     db.definedTrips.find({ $and: [{price: {$gte: PriceLow}},{price:{$lte: PriceHigh}}]},function(err,docs){
         res.json(docs)
@@ -29,11 +30,17 @@ app.get('/place/:country/:city', function(req,res){
 
     var Country = req.params.country;
     var City = req.params.city;
+    
+    // treba uraditi tako da mi svi podaci u bazi budu lowercase, svi svi ... i onda samo vamo kad budem uzimao parametar da 
+    // ga stavim u lowecase i to je to 
 
-    console.log(Country + " " + City);
+  //  console.log(Country + " " + City);
     
     db.definedTrips.find({ $or: [{country: Country}, {city: City}]}, function(err,docs){
-        res.json(docs);
+        
+       res.json(docs);
+        
+        
     });
    
    
@@ -69,7 +76,7 @@ app.post('/studentLogin',function(req,res){
     var Name = req.body.studentName;
     var Pass = req.body.password;
     
-    console.log(Name + " " + Pass);
+  //  console.log(Name + " " + Pass);
     
     
     db.students.findOne({username: Name,password: Pass}, function(err,docs){
@@ -94,10 +101,14 @@ app.get('/trips', function(req,res){
 
     db.definedTrips.find({}).limit(limit).skip(start,function(err,docs){
         res.json(docs);
+
+       
     });
 
 
 });
+
+
 
 //--------------------------------------------------- ADMIN ---------------------------------------------------------
 
@@ -105,6 +116,7 @@ app.post('/trips',function(req,res){
     
     db.definedTrips.insert(req.body, function(err,docs){
         res.json(docs);
+        
     });
     
 });
@@ -137,8 +149,6 @@ app.put('/tripUpdate/:id', function(req,res){
     
 )
 
-
-
 });
 
 // ----------------------------- INTERESTING -----------------------------------
@@ -161,7 +171,7 @@ app.put('/interesting/:vacation_id', function(req,res){
 app.get('/order/:value',function(req,res){
 
     var V = req.params.value;
-    console.log(V);
+   // console.log(V);
     
 
     if(V == 'high'){
@@ -174,7 +184,7 @@ app.get('/order/:value',function(req,res){
             {$match: {}},
             {$group: {_id: "$country", totalPrice: {$sum: "$price"}}}
         ]).sort({price: -1}, function(err,doc){
-            console.log(doc);
+          //  console.log(doc);
             
         })
 // rade !!!
@@ -205,13 +215,13 @@ app.get('/orderlow',function(req,res){
 app.post('/book/:vac_id/:Price', function(req,res){
 
     var idd = req.params.vac_id;
-   // console.log(idd + "  ++++");
-    var price = req.params.Price;
-  //  console.log(price);
+   
+    var price = parseInt(req.params.Price);
+ 
     var name = req.body.username;
-  // console.log(name);
+  
     var Phone = req.body.phone;
-  //  console.log(Phone);
+  
     
     
     db.book.insert({vacation_id: mongojs.ObjectId(idd),price:price,username: name,phone: Phone}, function(err,docs){
@@ -228,9 +238,6 @@ app.put('/ticketManage/:vac_id', function(req,res){
 
     var id = req.params.vac_id;
 
-   // console.log(id + " ++");
-
-    
     db.definedTrips.findAndModify({query: {_id: mongojs.ObjectId(id)},
     update: {$inc: {tickets: -1}}}, function(err,docs){
        res.json(docs);
@@ -254,7 +261,6 @@ function verifyJWTToken(token)
       {
         return reject(err)
       }
-
       resolve(decodedToken)
     })
   })
@@ -266,12 +272,10 @@ function createJWToken(details)
   {
     details = {}
   }
-
   if (!details.maxAge || typeof details.maxAge !== 'number')
   {
     details.maxAge = 180
   }
-
   details.sessionData = _.reduce(details.sessionData || {}, (memo, val, key) =>
   {
     if (typeof val !== "function" && key !== "password")
@@ -280,14 +284,12 @@ function createJWToken(details)
     }
     return memo
   }, {})
-
   let token = jwt.sign({
      data: details.sessionData
     }, "mehmed", { // "mehmed" --> secret key !
       expiresIn: details.maxAge,
       algorithm: 'HS256'
   })
-
   return token
 }
 
@@ -310,8 +312,6 @@ function verifyJWT_MW(req, res, next)
         .json({message: "Invalid auth token provided."})
     })
 }
-
-
 
 //--------------------  ABOUT -------------------------------------------------------------------------------
 
@@ -385,7 +385,6 @@ app.get('/getcoment',verifyJWT_MW, function(req,res){
 //--------------------------------------------------------- ADMIN MANAGEMENT -----------------------------------------------------------------------
 
 app.get('/totalProfit', function(req,res){
-
     var totalProfitt = 10;
     db.book.aggregate(
         [
@@ -399,11 +398,9 @@ app.get('/totalProfit', function(req,res){
 
             totalProfitt = totalProfitt + docs[i].total;
            }
-            console.log(totalProfitt);
+          //  console.log(totalProfitt);
             res.json(totalProfitt);
-            
         })
-        
 });
 
 app.get('/getBookedTrips', function(req,res){
@@ -422,12 +419,26 @@ app.get('/eachBookedTrip',function(req,res){
              total: {$sum: "$price"},
              number: {$sum: 1}}}
         ]).sort({price: -1}, function(err,docs){
-            
             res.json(docs);
-            
         })
-        
+});
+
+app.get('/getCount/:Show', function(req,res){
+
+    var show = req.params.Show;
+  //  console.log(show);
     
+    if(show == "stu"){
+    db.students.count({},function(err,docs){
+
+        res.json(docs);
+    });
+    }else{
+    db.book.count({},function(err,docs){
+
+        res.json(docs);
+    });
+    }
 });
 
 /*

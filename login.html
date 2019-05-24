@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+   <h1 style="margin: 20px 10px;">Admin login</h1>
+
+   <form >
+        <input ng-model="admin.name" type="text" class="form-control " placeholder="user name"> <br>
+        <input ng-model="admin.password" type="password" class="form-control " placeholder="password"> 
+        <button style="margin: 20px 10px;" class="btn btn-primary" ng-click="login(admin.name,admin.password)">Login</button>
+    </form>
+
+</body>
+</html>
