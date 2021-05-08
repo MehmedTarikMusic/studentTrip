@@ -9,7 +9,7 @@
     "express": "^4.16.4",
     "growl": "^1.10.5",
     "jsonwebtoken": "^8.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "mongojs": "^2.6.0"
   },
   "devDependencies": {},
